@@ -1,16 +1,12 @@
-import requests
-import json
-import re
-
 css = """
 <style>
 @font-face {
-font-family: 'JetBrainsMono';
-src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff'),
-url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf') format('truetype');
-font-weight: 400;
-font-style: normal;
+  font-family: 'JetBrainsMono';
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
 .loader-pulse {
@@ -41,142 +37,135 @@ font-style: normal;
 }
 
 ::-webkit-scrollbar {
-    width: 3px;
-    height: 3px;
+  width: 3px;
+  height: 3px;
 }
 
-::-webkit-scrollbar-corner ,
+::-webkit-scrollbar-corner,
 ::-webkit-scrollbar-track {
-    display: none;
+  display: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: #50fa7b;
+  border-radius: 8px;
+  background-color: #50fa7b;
 }
 
 body {
-background-color: #282a36;
-font-family:  "Josefin Sans", sans-serif;
-color: #f8f8f2;
-overscroll-behaviour: contain;
+  background-color: #282a36;
+  font-family: "Josefin Sans", sans-serif;
+  color: #f8f8f2;
+  overscroll-behaviour: contain;
 }
 
-
 code {
-font-family: "Ubuntu mono", "Courier prime";
+  font-family: "Ubuntu mono", "Courier prime";
 }
 
 .container {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .container.heading {
-display: block;
-text-align: center;
-line-height: 20px;
-flex-direction: column;
-
-margin: auto;
-margin-bottom: 50px;
-padding: 20px 20px 20px 20px;
-font-size: 1rem;
-overflow: scroll;
-background-color: rgba(255, 255, 255, 0.1);
-border-radius: 7px;
-border-style: dashed;
-font-family: "Ubuntu mono", "Courier prime";
-border: 2px solid rgba(255, 255, 255, 0.1);
+  display: block;
+  text-align: center;
+  line-height: 20px;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 50px;
+  padding: 20px;
+  font-size: 1rem;
+  overflow: scroll;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  border-style: dashed;
+  font-family: "Ubuntu mono", "Courier prime";
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .container.heading::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 
 .container.subheading {
-margin-left: 15px;
-margin-bottom:15px;
-padding-top: 10px; 
-font-size: 1.4rem;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  font-size: 1.4rem;
 }
 
 .container.infobox {
-margin-bottom: 40px;
-margin-left: 12px;
-margin-right: 12px;
-  
-border-radius: 10px;
-background:  rgba(255, 255, 255, 0.1);        
-border: 2.5px solid rgba(255, 255, 255, 0.1);
-padding: 10px 15px 15px 10px;
-white-space: pre ;
-overflow: scroll;
-font-size: 0.9rem;
+  margin-bottom: 40px;
+  margin-left: 12px;
+  margin-right: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2.5px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 15px 15px 10px;
+  white-space: pre;
+  overflow: scroll;
+  font-size: 0.9rem;
 }
 
 .subtitle {
-display: grid;
-grid-auto-flow: column;
-grid-auto-columns:320px;
-overflow-x: auto;
-overscroll-behaviour-inline: contain;
-margin-bottom: 40px;
-margin-left: 7px;
-margin-top: 12px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 320px;
+  overflow-x: auto;
+  overscroll-behaviour-inline: contain;
+  margin-bottom: 40px;
+  margin-left: 7px;
+  margin-top: 12px;
 }
 
 .subtitle::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 
 .container.subtitlebox {
-margin-left: 5px;
-margin-right: 15px;
-margin-bottom: 0px;
-border-radius: 10px; 
-background: rgba(255, 255, 255, 0.1);          
-border: 3px solid rgba(255, 255, 255, 0.1);
-padding: 15px 15px 15px 10px;
-white-space: nowrap;
-overflow: scroll;
-font-size: 0.9rem;
+  margin-left: 5px;
+  margin-right: 15px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  white-space: nowrap;
+  overflow: scroll;
+  font-size: 0.9rem;
 }
 
 .icons {
-float: left;
-margin-left: 15px;
-margin-right: 5px;
+  float: left;
+  margin-left: 15px;
+  margin-right: 5px;
 }
 
 .footer {
-position: fixed;
-bottom: 0;
-right: 0;
-left: 0;
-height: 32px;
-width: 100%;
-font-family: JetBrainsMono;
-background-color: #212121;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-family: JetBrainsMono;
+  background-color: #212121;
 }
 
-.footer-text{
-display: block;
-justify-content: space-between;
-font-size: 0.9rem;
-padding-left: 0.7rem;
-padding-right: 1.5rem;
-padding-top: 0.25rem;
+.footer-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 0.25rem 1.5rem;
+  color: #50fa7b;
 }
 </style>
 </head>
 """
 
-def html_builder(title: str, text: str) -> str:
-    """
-    Make proper html with css from given content.
-    """
+import requests
+import json
+import re
 
+def html_builder(title: str, text: str) -> str:
     heading = "<span class='container heading'><b>{content}</b></span>"
     subheading = "<span class='container subheading'><b>{content}</b></span>"
     infobox = "<span class='container infobox'>"
@@ -195,7 +184,7 @@ def html_builder(title: str, text: str) -> str:
                     html_msg += subheading.format(
                         content=f"Subtitles ({subtitle_count} subtitle)"
                     )
-                    html_msg += "<span  style='padding: 10px 0vw;'  class='subtitle'>"
+                    html_msg += "<span style='padding: 10px 0;' class='subtitle'>"
 
             elif "General" in line:
                 html_msg += icon.format(
@@ -244,8 +233,8 @@ def html_builder(title: str, text: str) -> str:
     <div class='footer'>
       <div class='footer-text'>
         <div class='loader-pulse'></div>
-        <a href="https://github.com/sanjit-sinha" style="color: #50fa7b;"><b>© its me bab</b></a>
-        <a href="https://github.com/sanjit-sinha/Tg-MediaInfoBot" style="color: #50fa7b; float: right;"><b>Github</b></a>
+        <a href="https://github.com/sanjit-sinha"><b>© its me bab</b></a>
+        <a href="https://github.com/sanjit-sinha/Tg-MediaInfoBot" style="float: right;"><b>Github</b></a>
       </div>
     </div>
     """
@@ -254,7 +243,7 @@ def html_builder(title: str, text: str) -> str:
 
 def mediainfo_paste(text: str, title: str) -> str:
     html_content = html_builder(title, text)
-    print("Generated HTML Content:\n", html_content)  # Print the HTML content for verification
+    print("meida info on go")
     URL = "https://mediainfo-1-y5870653.deta.app/api"
     response = requests.post(URL, json={"content": html_content})
     if response.status_code == 200:
