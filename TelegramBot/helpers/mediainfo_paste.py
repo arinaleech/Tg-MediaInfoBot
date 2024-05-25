@@ -256,6 +256,7 @@ def html_builder(title: str, text: str) -> str:
 
 def mediainfo_paste(text: str, title: str) -> str:
     html_content = html_builder(title, text)
+    print("meida info on go")
     URL = "https://mediainfo-1-y5870653.deta.app/api"
     response = requests.post(URL, json={"content": html_content})
     if response.status_code == 200:
