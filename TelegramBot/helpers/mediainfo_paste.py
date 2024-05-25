@@ -245,7 +245,7 @@ def html_builder(title: str, text: str) -> str:
     <div class='footer'>
       <div class='footer-text'>
         <div class='loader-pulse'></div>
-        <a href="https://github.com/sanjit-sinha" style="color: #50fa7b;"><b>© 2023 sanjit-sinha</b></a>
+        <a href="https://github.com/sanjit-sinha" style="color: #50fa7b;"><b>© its me bab</b></a>
         <a href="https://github.com/sanjit-sinha/Tg-MediaInfoBot" style="color: #50fa7b; float: right;"><b>Github</b></a>
       </div>
     </div>
