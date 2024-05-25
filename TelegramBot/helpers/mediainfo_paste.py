@@ -9,33 +9,6 @@ css = """
   font-style: normal;
 }
 
-.loader-pulse {
-  position: relative;
-  bottom: 0.17rem;
-  width: 25px;
-  height: 25px;
-  float: left;
-  border-radius: 50%;
-  background: #50fa7b;
-  animation: load-pulse 1s infinite linear;
-}
-
-@keyframes load-pulse {
-  0% {
-    transform: scale(0.05);
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
@@ -141,22 +114,6 @@ code {
   margin-left: 15px;
   margin-right: 5px;
 }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  font-family: JetBrainsMono;
-  background-color: #212121;
-}
-
-.footer-text {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  padding: 0.25rem 1.5rem;
-  color: #50fa7b;
-}
 </style>
 </head>
 """
@@ -228,22 +185,11 @@ def html_builder(title: str, text: str) -> str:
 
     html_msg += "</span>"
 
-    # Add footer content
-    html_msg += """
-    <div class='footer'>
-      <div class='footer-text'>
-        <div class='loader-pulse'></div>
-        <a href="https://github.com/sanjit-sinha"><b>© its me bab</b></a>
-        <a href="https://github.com/sanjit-sinha/Tg-MediaInfoBot" style="float: right;"><b>Github</b></a>
-      </div>
-    </div>
-    """
-    
     return css + html_msg
 
 def mediainfo_paste(text: str, title: str) -> str:
     html_content = html_builder(title, text)
-    print("meida info on go")
+    print("media info on go")
     URL = "https://mediainfo-1-y5870653.deta.app/api"
     response = requests.post(URL, json={"content": html_content})
     if response.status_code == 200:
