@@ -1,3 +1,7 @@
+import requests
+import json
+import re
+
 css = """
 <style>
 @font-face {
@@ -168,11 +172,6 @@ padding-top: 0.25rem;
 </head>
 """
 
-import requests
-import json
-import re
-
-
 def html_builder(title: str, text: str) -> str:
     """
     Make proper html with css from given content.
@@ -253,10 +252,9 @@ def html_builder(title: str, text: str) -> str:
     
     return css + html_msg
 
-
 def mediainfo_paste(text: str, title: str) -> str:
     html_content = html_builder(title, text)
-    print("meida info on go")
+    print("Generated HTML Content:\n", html_content)  # Print the HTML content for verification
     URL = "https://mediainfo-1-y5870653.deta.app/api"
     response = requests.post(URL, json={"content": html_content})
     if response.status_code == 200:
