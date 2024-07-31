@@ -43,7 +43,7 @@ RUN wget -q -O /tmp/mediainfo.deb https://mediaarea.net/download/binary/mediainf
 
 RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
-COPY requirements.txt .
+COPY needs.txt .
 
 RUN pip3 install --no-cache-dir -r needs.txt
 
