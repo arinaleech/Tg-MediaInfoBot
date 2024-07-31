@@ -16,7 +16,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ffmpeg \
     libsox-fmt-mp3 \
     sox \
-    locales \
     megatools \
     && rm -rf /var/lib/apt/lists/*
 
@@ -39,9 +38,6 @@ RUN wget -q -O /tmp/libmediainfo-dev.deb http://ftp.de.debian.org/debian/pool/ma
 RUN wget -q -O /tmp/mediainfo.deb https://mediaarea.net/download/binary/mediainfo/22.12/mediainfo_22.12-1_arm64.xUbuntu_20.04.deb \
     && dpkg -i /tmp/mediainfo.deb || apt-get install -f -y \
     && rm /tmp/mediainfo.deb
-
-RUN locale-gen en_US.UTF-8 && \
-    update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 COPY needs.txt .
 
