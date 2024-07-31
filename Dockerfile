@@ -1,6 +1,6 @@
 FROM python:3.11
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 LANGUAGE=en_US:en TZ=Asia/Kolkata
+ENV TZ=Asia/Kolkata
 
 WORKDIR /usr/src/app
 
