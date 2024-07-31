@@ -45,6 +45,6 @@ RUN pip3 install --no-cache-dir -r needs.txt
 
 COPY . .
 
-RUN chmod +x start
+RUN chmod +x start.sh
 
-CMD ["bash", "start"]
+CMD ["bash", "start.sh"]
