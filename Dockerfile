@@ -40,7 +40,8 @@ RUN wget -q -O /tmp/mediainfo.deb https://mediaarea.net/download/binary/mediainf
     && dpkg -i /tmp/mediainfo.deb || apt-get install -f -y \
     && rm /tmp/mediainfo.deb
 
-RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+RUN locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 COPY needs.txt .
 
