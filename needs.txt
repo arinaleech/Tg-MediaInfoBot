@@ -15,3 +15,7 @@ uvloop
 httpx
 bs4
 python-dotenv
+flash
+yt-dlp
+youTube_dl
+
